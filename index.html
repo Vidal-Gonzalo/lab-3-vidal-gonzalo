@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio 3 - Primer parcial</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="data-form">
+      <h1>Form Data</h1>
+
+      <label for="filter-select">Filtrar por:</label>
+      <select id="filter-select">
+        <option value="all">Todos</option>
+        <option value="hero">Héroe</option>
+        <option value="villain">Villano</option>
+      </select>
+
+      <label for="average-age-input">Calcular edad promedio:</label>
+      <div id="average-age"></div>
+      <button id="calculate-btn">Calcular</button>
+
+      <label>Mostrar columnas:</label>
+      <div class="checkbox-group">
+        <div class="checkbox">
+          <label for="id-checkbox">ID</label>
+          <input type="checkbox" id="id-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="name-checkbox">NOMBRE</label>
+          <input type="checkbox" id="name-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="lastname-checkbox">APELLIDO</label>
+          <input type="checkbox" id="lastname-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="age-checkbox">EDAD</label>
+          <input type="checkbox" id="age-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="alterEgo-checkbox">ALTEREGO</label>
+          <input type="checkbox" id="alterEgo-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="city-checkbox">CIUDAD</label>
+          <input type="checkbox" id="city-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="published-checkbox">PUBLICADO</label>
+          <input type="checkbox" id="published-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="enemy-checkbox">ENEMIGO</label>
+          <input type="checkbox" id="enemy-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="robberies-checkbox">ROBOS</label>
+          <input type="checkbox" id="robberies-checkbox" checked />
+        </div>
+        <div class="checkbox">
+          <label for="murders-checkbox">ASESINATOS</label>
+          <input type="checkbox" id="murders-checkbox" checked />
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th data-column="id" id="id-checkbox">ID</th>
+            <th data-column="name" id="name-checkbox">Nombre</th>
+            <th data-column="lastname" id="lastname-checkbox">Apellido</th>
+            <th data-column="age" id="age-checkbox">Edad</th>
+            <th data-column="alterEgo" id="alterego-checkbox">Alter Ego</th>
+            <th data-column="city" id="city-checkbox">Ciudad</th>
+            <th data-column="published" id="published-checkbox">Publicado</th>
+            <th data-column="enemy" id="enemy-checkbox">Enemigo</th>
+            <th data-column="robberies" id="robberies-checkbox">Robos</th>
+            <th data-column="murders" id="murders-checkbox">Asesinatos</th>
+          </tr>
+        </thead>
+        <tbody id="table"></tbody>
+      </table>
+      <button class="btn" onclick="showABMForm()">Agregar</button>
+    </div>
+    <form id="abm-form">
+      <div>
+        <label for="abm-id">ID:</label>
+        <input type="number" id="abm-id" />
+      </div>
+      <input type="hidden" id="abm-id" />
+      <div>
+        <label for="abm-name">Nombre:</label>
+        <input type="text" id="abm-name" required />
+      </div>
+      <div>
+        <label for="abm-lastname">Apellido:</label>
+        <input type="text" id="abm-lastname" required />
+      </div>
+      <div>
+        <label for="abm-age">Edad:</label>
+        <input type="number" id="abm-age" required />
+      </div>
+      <div>
+        <label for="abm-alterego">Alter Ego:</label>
+        <input type="text" id="abm-alterego" required />
+      </div>
+      <div>
+        <label for="abm-city">Ciudad:</label>
+        <input type="text" id="abm-city" required />
+      </div>
+      <div>
+        <label for="abm-published">Publicado:</label>
+        <input type="number" id="abm-published" />
+      </div>
+      <div>
+        <label for="abm-enemy">Enemigo:</label>
+        <input type="checkbox" id="abm-enemy" />
+      </div>
+      <div>
+        <label for="abm-robberies">Robos:</label>
+        <input type="number" id="abm-robberies" required />
+      </div>
+      <div>
+        <label for="abm-murders">Asesinatos:</label>
+        <input type="number" id="abm-murders" required />
+      </div>
+      <div>
+        <button type="button" id="add-btn" data-operation="add">Agregar</button>
+        <button type="button" id="edit-btn" data-operation="edit">
+          Modificar
+        </button>
+        <button type="button" id="delete-btn" data-operation="delete">
+          Eliminar
+        </button>
+        <button type="button" id="cancel-btn" data-operation="cancel">
+          Cancelar
+        </button>
+      </div>
+    </form>
+    <script src="scripts/forms/dataForm.js"></script>
+  </body>
+</html>
