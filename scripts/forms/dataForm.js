@@ -75,7 +75,7 @@ class Person {
     this.id = id;
     this.name = name;
     this.lastname = lastname;
-    this.age = age;
+    this.age = parseInt(age);
   }
 }
 
@@ -218,7 +218,7 @@ const calculateAverageAgeInFilteredPersons = () => {
     return accumulator + person.age;
   }, 0);
   const average = ages / filteredData.length;
-  averageAge.innerHTML = average;
+  averageAge.innerHTML = average.toFixed(1);
 };
 
 const createPersonRow = (person) => {
