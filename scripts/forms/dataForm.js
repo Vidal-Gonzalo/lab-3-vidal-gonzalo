@@ -1,59 +1,139 @@
-let data = [
+let rawData = [
   {
     id: 1,
-    name: "Clark",
-    lastname: "Kent",
+    name: "Marcelo",
+    lastname: "Luque",
     age: 45,
-    alterEgo: "Superman",
-    city: "Metropolis",
-    published: 2002,
+    title: "Ingeniero",
+    university: "UTN",
+    graduated: 2002,
   },
   {
     id: 2,
-    name: "Bruce",
-    lastname: "Wayne",
+    name: "Ramiro",
+    lastname: "Escobar",
     age: 35,
-    alterEgo: "Batman",
-    city: "Gotica",
-    published: 20012,
+    title: "Medico",
+    university: "UBA",
+    graduated: 20012,
   },
   {
     id: 3,
-    name: "Bart",
-    lastname: "Alen",
+    name: "Facundo",
+    lastname: "Cairo",
     age: 30,
-    alterEgo: "Flash",
-    city: "Central",
-    published: 2017,
+    title: "Abogado",
+    university: "UCA",
+    graduated: 2017,
   },
   {
     id: 4,
-    name: "Lex",
-    lastname: "Luthor",
+    name: "Fernando",
+    lastname: "Nieto",
     age: 18,
-    enemy: "Superman",
-    robberies: 500,
-    murders: 7,
+    team: "Independiente",
+    position: "Delantero",
+    goals: 7,
   },
   {
     id: 5,
-    name: "Harvey",
-    lastname: "Dent",
+    name: "Manuel",
+    lastname: "Loza",
     age: 20,
-    enemy: "Batman",
-    robberies: 750,
-    murders: 2,
+    team: "Racing",
+    position: "Volante",
+    goals: 2,
   },
   {
     id: 6,
-    name: "Celina",
-    lastname: "kyle",
+    name: "Nicolas",
+    lastname: "Serrano",
     age: 23,
-    enemy: "Batman",
-    robberies: 25,
-    murders: 1,
+    team: "Boca",
+    position: "Arquero",
+    goals: 1,
   },
 ];
+
+class Person {
+  constructor(id, name, lastname, age) {
+    if (!id) {
+      throw new Error("ID is mandatory");
+    }
+    if (!name) {
+      throw new Error("Name is mandatory");
+    }
+    if (!lastname) {
+      throw new Error("Lastname is mandatory");
+    }
+    if (!age) {
+      throw new Error("Age is mandatory");
+    }
+    if (age < 15) {
+      throw new Error("Age should be above 15");
+    }
+    this.id = id;
+    this.name = name;
+    this.lastname = lastname;
+    this.age = age;
+  }
+}
+
+class SoccerPlayer extends Person {
+  constructor(id, name, lastname, age, team, position, goals) {
+    super(id, name, lastname, age);
+    if (!team || !position) {
+      throw new Error("Invalid SoccerPlayer. ");
+    }
+    if (goals <= -1) {
+      throw new Error("Goals should be more than -1");
+    }
+    this.team = team;
+    this.position = position;
+    this.goals = goals;
+  }
+}
+
+class Professional extends Person {
+  constructor(id, name, lastname, age, title, university, graduated) {
+    super(id, name, lastname, age);
+    if (!title || !university) {
+      throw new Error("Invalid professional");
+    }
+    if (graduated < 1950) {
+      throw new Error("Graduated date should be above 1950");
+    }
+    this.title = title;
+    this.university = university;
+    this.graduated = graduated;
+  }
+}
+
+let data = rawData.map((item) => {
+  if (item.title) {
+    return new Professional(
+      item.id,
+      item.name,
+      item.lastname,
+      item.age,
+      item.title,
+      item.university,
+      item.graduated
+    );
+  } else if (item.team) {
+    return new SoccerPlayer(
+      item.id,
+      item.name,
+      item.lastname,
+      item.age,
+      item.team,
+      item.position,
+      item.goals
+    );
+  } else {
+    return new Person(item.id, item.name, item.lastname, item.age);
+  }
+});
 
 const tbody = document.querySelector("#table");
 const filterSelect = document.getElementById("filter-select");
@@ -65,16 +145,46 @@ const idCheckbox = document.getElementById("id-checkbox");
 const nameCheckbox = document.getElementById("name-checkbox");
 const lastNameCheckbox = document.getElementById("lastname-checkbox");
 const ageCheckbox = document.getElementById("age-checkbox");
-const alterEgoCheckbox = document.getElementById("alterEgo-checkbox");
-const cityCheckbox = document.getElementById("city-checkbox");
-const publishedCheckbox = document.getElementById("published-checkbox");
-const enemyCheckbox = document.getElementById("enemy-checkbox");
-const robberiesCheckbox = document.getElementById("robberies-checkbox");
-const murdersCheckbox = document.getElementById("murders-checkbox");
+const teamCheckbox = document.getElementById("team-checkbox");
+const positionCheckbox = document.getElementById("position-checkbox");
+const goalsCheckbox = document.getElementById("goals-checkbox");
+const titleCheckbox = document.getElementById("title-checkbox");
+const universityCheckbox = document.getElementById("university-checkbox");
+const graduatedCheckbox = document.getElementById("graduated-checkbox");
 const addButton = document.getElementById("add-btn");
 const editButton = document.getElementById("edit-btn");
 const cancelButton = document.getElementById("cancel-btn");
 const deleteButton = document.getElementById("delete-btn");
+const idInputContainer = document.getElementById("abm-id-container");
+const nameInputContainer = document.getElementById("abm-name-container");
+const lastnameInputContainer = document.getElementById(
+  "abm-lastname-container"
+);
+const typeInputContainer = document.getElementById("abm-type-container");
+const ageInputContainer = document.getElementById("abm-age-container");
+const teamInputContainer = document.getElementById("abm-team-container");
+const positionInputContainer = document.getElementById(
+  "abm-position-container"
+);
+const goalsInputContainer = document.getElementById("abm-goals-container");
+const titleInputContainer = document.getElementById("abm-title-container");
+const universityInputContainer = document.getElementById(
+  "abm-university-container"
+);
+const graduatedInputContainer = document.getElementById(
+  "abm-graduated-container"
+);
+const idInput = document.getElementById("abm-id");
+const nameInput = document.getElementById("abm-name");
+const lastnameInput = document.getElementById("abm-lastname");
+const typeSelect = document.getElementById("abm-type");
+const ageInput = document.getElementById("abm-age");
+const teamInput = document.getElementById("abm-team");
+const positionInput = document.getElementById("abm-position");
+const goalsInput = document.getElementById("abm-goals");
+const titleInput = document.getElementById("abm-title");
+const universityInput = document.getElementById("abm-university");
+const graduatedInput = document.getElementById("abm-graduated");
 
 const createTableBody = (arr) => {
   tbody.innerHTML = "";
@@ -86,8 +196,8 @@ const createTableBody = (arr) => {
 
 const filterPersons = (filter) => {
   return (filteredList = data.filter((person) => {
-    if (filter === "hero") return person.alterEgo;
-    if (filter === "villain") return person.murders;
+    if (filter === "soccerPlayer") return person instanceof SoccerPlayer;
+    if (filter === "professional") return person instanceof Professional;
     return true;
   }));
 };
@@ -95,6 +205,7 @@ const filterPersons = (filter) => {
 const filterPersonsAndCreateBody = () => {
   const filter = filterSelect.value;
   const filteredList = filterPersons(filter);
+  console.log(filteredList);
   tbody.innerHTML = "";
   createTableBody(filteredList);
 };
@@ -102,6 +213,7 @@ const filterPersonsAndCreateBody = () => {
 const calculateAverageAgeInFilteredPersons = () => {
   const filter = filterSelect.value;
   const filteredData = filterPersons(filter);
+  console.log(filteredData);
   const ages = filteredData.reduce((accumulator, person) => {
     return accumulator + person.age;
   }, 0);
@@ -116,12 +228,12 @@ const createPersonRow = (person) => {
     "name",
     "lastname",
     "age",
-    "alterEgo",
-    "city",
-    "published",
-    "enemy",
-    "robberies",
-    "murders",
+    "team",
+    "position",
+    "goals",
+    "title",
+    "university",
+    "graduated",
   ];
   for (const prop of properties) {
     const td = document.createElement("td");
@@ -175,12 +287,12 @@ idCheckbox.addEventListener("change", toggleColumns);
 nameCheckbox.addEventListener("change", toggleColumns);
 lastNameCheckbox.addEventListener("change", toggleColumns);
 ageCheckbox.addEventListener("change", toggleColumns);
-alterEgoCheckbox.addEventListener("change", toggleColumns);
-cityCheckbox.addEventListener("change", toggleColumns);
-publishedCheckbox.addEventListener("change", toggleColumns);
-enemyCheckbox.addEventListener("change", toggleColumns);
-robberiesCheckbox.addEventListener("change", toggleColumns);
-murdersCheckbox.addEventListener("change", toggleColumns);
+teamCheckbox.addEventListener("change", toggleColumns);
+positionCheckbox.addEventListener("change", toggleColumns);
+goalsCheckbox.addEventListener("change", toggleColumns);
+titleCheckbox.addEventListener("change", toggleColumns);
+universityCheckbox.addEventListener("change", toggleColumns);
+graduatedCheckbox.addEventListener("change", toggleColumns);
 
 createTableBody(data);
 
@@ -215,87 +327,260 @@ tableHeaders.forEach((header) => {
   });
 });
 
-const showABMForm = (selectedRow) => {
+const changeType = () => {
+  const filter = typeSelect.value;
+  if (filter === "") {
+    teamInputContainer.style.display = "none";
+    positionInputContainer.style.display = "none";
+    goalsInputContainer.style.display = "none";
+    titleInputContainer.style.display = "none";
+    universityInputContainer.style.display = "none";
+    graduatedInputContainer.style.display = "none";
+  }
+  if (filter === "soccerPlayer") {
+    teamInputContainer.style.display = "block";
+    positionInputContainer.style.display = "block";
+    goalsInputContainer.style.display = "block";
+    titleInputContainer.style.display = "none";
+    universityInputContainer.style.display = "none";
+    graduatedInputContainer.style.display = "none";
+  }
+  if (filter === "professional") {
+    titleInputContainer.style.display = "block";
+    universityInputContainer.style.display = "block";
+    graduatedInputContainer.style.display = "block";
+    teamInputContainer.style.display = "none";
+    positionInputContainer.style.display = "none";
+    goalsInputContainer.style.display = "none";
+  }
+};
+
+const resetForm = () => {
+  const inputs = [
+    { container: idInputContainer, input: idInput },
+    { container: nameInputContainer, input: nameInput },
+    { container: lastnameInputContainer, input: lastnameInput },
+    { container: ageInputContainer, input: ageInput },
+    { container: typeInputContainer, input: typeSelect },
+    { container: teamInputContainer, input: teamInput },
+    { container: goalsInputContainer, input: goalsInput },
+    { container: positionInputContainer, input: positionInput },
+    { container: titleInputContainer, input: titleInput },
+    { container: universityInputContainer, input: universityInput },
+    { container: graduatedInputContainer, input: graduatedInput },
+  ];
+
+  inputs.forEach(({ container, input }) => {
+    container.style.display = "none";
+    input.value = "";
+  });
+};
+
+const showABMForm = (selectedRow, type) => {
   const dataForm = document.getElementById("data-form");
   const abmForm = document.getElementById("abm-form");
 
-  if (selectedRow) {
-    const id = selectedRow.querySelector("td:first-child").textContent;
-  } else {
-  }
-
   dataForm.style.display = "none";
   abmForm.style.display = "block";
+
+  if (selectedRow) {
+    resetForm();
+    const id = selectedRow.querySelector("td:first-child").textContent;
+    const name = selectedRow.querySelector("td:nth-child(2)").textContent;
+    const lastname = selectedRow.querySelector("td:nth-child(3)").textContent;
+    const age = selectedRow.querySelector("td:nth-child(4)").textContent;
+    const team = selectedRow.querySelector("td:nth-child(5)").textContent;
+    const position = selectedRow.querySelector("td:nth-child(6)").textContent;
+    const goals = selectedRow.querySelector("td:nth-child(7)").textContent;
+    const title = selectedRow.querySelector("td:nth-child(8)").textContent;
+    const university = selectedRow.querySelector("td:nth-child(9)").textContent;
+    const graduated = selectedRow.querySelector("td:nth-child(10)").textContent;
+
+    idInputContainer.style.display = "block";
+    idInput.disabled = true;
+    nameInputContainer.style.display = "block";
+    lastnameInputContainer.style.display = "block";
+    ageInputContainer.style.display = "block";
+    typeInputContainer.style.display = "block";
+    addButton.style.display = "none";
+    editButton.style.display = "flex";
+    idInput.value = id;
+    nameInput.value = name;
+    lastnameInput.value = lastname;
+    ageInput.value = age;
+    if (team !== "") {
+      typeSelect.value = "soccerPlayer";
+      teamInputContainer.style.display = "block";
+      positionInputContainer.style.display = "block";
+      goalsInputContainer.style.display = "block";
+      titleInputContainer.style.display = "none";
+      universityInputContainer.style.display = "none";
+      graduatedInputContainer.style.display = "none";
+      teamInput.value = team;
+      positionInput.value = position;
+      goalsInput.value = goals;
+      titleInput.value = "";
+      universityInput.value = "";
+      graduatedInput.value = "";
+    } else {
+      typeSelect.value = "professional";
+      teamInputContainer.style.display = "none";
+      positionInputContainer.style.display = "none";
+      goalsInputContainer.style.display = "none";
+      titleInputContainer.style.display = "block";
+      universityInputContainer.style.display = "block";
+      graduatedInputContainer.style.display = "block";
+      titleInput.value = title;
+      universityInput.value = university;
+      graduatedInput.value = graduated;
+    }
+  }
+  typeSelect.addEventListener("change", changeType);
+
+  switch (type) {
+    case "add":
+      resetForm();
+      idInputContainer.style.display = "block";
+      idInput.disabled = true;
+      nameInputContainer.style.display = "block";
+      lastnameInputContainer.style.display = "block";
+      ageInputContainer.style.display = "block";
+      typeInputContainer.style.display = "block";
+      addButton.style.display = "block";
+      editButton.style.display = "none";
+      deleteButton.style.display = "none";
+      break;
+    case "edit":
+      resetForm();
+      idInputContainer.style.display = "block";
+      idInput.disabled = false;
+      nameInputContainer.style.display = "block";
+      lastnameInputContainer.style.display = "block";
+      ageInputContainer.style.display = "block";
+      typeInputContainer.style.display = "block";
+      addButton.style.display = "none";
+      editButton.style.display = "block";
+      deleteButton.style.display = "none";
+      break;
+    case "delete":
+      resetForm();
+      idInputContainer.style.display = "block";
+      idInput.disabled = false;
+      addButton.style.display = "none";
+      editButton.style.display = "none";
+      deleteButton.style.display = "block";
+      break;
+    default:
+      break;
+  }
 };
 
 const handleABMForm = (event) => {
   event.preventDefault();
 
-  const idInput = document.getElementById("abm-id");
-  const nameInput = document.getElementById("abm-name");
-  const lastnameInput = document.getElementById("abm-lastname");
-  const ageInput = document.getElementById("abm-age");
-  const alterEgoInput = document.getElementById("abm-alterego");
-  const cityInput = document.getElementById("abm-city");
-  const publishedInput = document.getElementById("abm-published");
-  const enemyInput = document.getElementById("abm-enemy");
-  const robberiesInput = document.getElementById("abm-robberies");
-  const murdersInput = document.getElementById("abm-murders");
-
   const operation = event.target.getAttribute("data-operation");
-  let newPerson = {};
 
   switch (operation) {
     case "add":
-      // generate unique id for new person
-
-      const uniqueId = Math.floor(Math.random() * 100).toString();
-
-      newPerson = {
-        id: uniqueId,
-        name: nameInput.value,
-        lastname: lastnameInput.value,
-        age: ageInput.value,
-        alterEgo: alterEgoInput.value,
-        city: cityInput.value,
-        published: publishedInput.checked,
-        enemy: enemyInput.checked,
-        robberies: robberiesInput.value,
-        murders: murdersInput.value,
-      };
+      const uniqueId = Math.floor(Math.random() * 100);
+      if (typeSelect.value === "soccerPlayer") {
+        let name = nameInput.value;
+        let lastname = lastnameInput.value;
+        let age = ageInput.value;
+        let team = teamInput.value;
+        let position = positionInput.value;
+        let goals = goalsInput.value;
+        const newSoccerPlayer = new SoccerPlayer(
+          uniqueId,
+          name,
+          lastname,
+          age,
+          team,
+          position,
+          goals
+        );
+        data.push(newSoccerPlayer);
+      }
+      if (typeSelect.value === "professional") {
+        let name = nameInput.value;
+        let lastname = lastnameInput.value;
+        let age = ageInput.value;
+        let title = titleInput.value;
+        let university = universityInput.value;
+        let graduated = graduatedInput.value;
+        const newProfessional = new Professional(
+          uniqueId,
+          name,
+          lastname,
+          age,
+          title,
+          university,
+          graduated
+        );
+        data.push(newProfessional);
+      }
 
       // add new person to the array of data
-      data.push(newPerson);
       createTableBody(data);
       break;
 
     case "edit":
       const id = parseInt(idInput.value);
-
-      // find person in the array of data and update their properties
+      let modified = false;
       data = data.map((person) => {
         if (person.id === id) {
-          return {
-            ...person,
-            name: nameInput.value,
-            lastname: lastnameInput.value,
-            age: ageInput.value,
-            alterEgo: alterEgoInput.value,
-            city: cityInput.value,
-            published: publishedInput.checked,
-            enemy: enemyInput.checked,
-            robberies: robberiesInput.value,
-            murders: murdersInput.value,
-          };
+          modified = true;
+          if (typeSelect.value === "soccerPlayer") {
+            let name = nameInput.value;
+            let lastname = lastnameInput.value;
+            let age = ageInput.value;
+            let team = teamInput.value;
+            let position = positionInput.value;
+            let goals = goalsInput.value;
+            const newSoccerPlayer = new SoccerPlayer(
+              person.id,
+              name,
+              lastname,
+              age,
+              team,
+              position,
+              goals
+            );
+            return newSoccerPlayer;
+          }
+          if (typeSelect.value === "professional") {
+            let name = nameInput.value;
+            let lastname = lastnameInput.value;
+            let age = ageInput.value;
+            let title = titleInput.value;
+            let university = universityInput.value;
+            let graduated = graduatedInput.value;
+            const newProfessional = new Professional(
+              person.id,
+              name,
+              lastname,
+              age,
+              title,
+              university,
+              graduated
+            );
+            return newProfessional;
+          }
         } else {
           return person;
         }
       });
+      if (!modified) {
+        alert("No se encontró una persona con ese ID");
+      } else {
+        alert("Persona modificada");
+      }
+      createTableBody(data);
       break;
 
     case "delete":
       const deleteConfirmation = confirm(
-        "Are you sure you want to delete this person?"
+        "Estás seguro que quieres eliminar a esta persona?"
       );
       if (deleteConfirmation) {
         let id = parseInt(idInput.value);
@@ -304,6 +589,15 @@ const handleABMForm = (event) => {
         createTableBody(data);
       } else {
         return;
+      }
+      break;
+
+    case "cancel":
+      const cancelConfirmation = confirm(
+        "¿Estás seguro que quieres cancelar la operación?"
+      );
+      if (cancelConfirmation) {
+        createTableBody(data);
       }
       break;
 

@@ -14,11 +14,11 @@
       <label for="filter-select">Filtrar por:</label>
       <select id="filter-select">
         <option value="all">Todos</option>
-        <option value="hero">Héroe</option>
-        <option value="villain">Villano</option>
+        <option value="soccerPlayer">Futbolista</option>
+        <option value="professional">Profesional</option>
       </select>
 
-      <label for="average-age-input">Calcular edad promedio:</label>
+      <p>Calcular edad promedio:</p>
       <div id="average-age"></div>
       <button id="calculate-btn">Calcular</button>
 
@@ -41,28 +41,28 @@
           <input type="checkbox" id="age-checkbox" checked />
         </div>
         <div class="checkbox">
-          <label for="alterEgo-checkbox">ALTEREGO</label>
-          <input type="checkbox" id="alterEgo-checkbox" checked />
+          <label for="team-checkbox">EQUIPO</label>
+          <input type="checkbox" id="team-checkbox" checked />
         </div>
         <div class="checkbox">
-          <label for="city-checkbox">CIUDAD</label>
-          <input type="checkbox" id="city-checkbox" checked />
+          <label for="position-checkbox">POSICIÓN</label>
+          <input type="checkbox" id="position-checkbox" checked />
         </div>
         <div class="checkbox">
-          <label for="published-checkbox">PUBLICADO</label>
-          <input type="checkbox" id="published-checkbox" checked />
+          <label for="goals-checkbox">CANT.GOLES</label>
+          <input type="checkbox" id="goals-checkbox" checked />
         </div>
         <div class="checkbox">
-          <label for="enemy-checkbox">ENEMIGO</label>
-          <input type="checkbox" id="enemy-checkbox" checked />
+          <label for="title-checkbox">TITULO</label>
+          <input type="checkbox" id="title-checkbox" checked />
         </div>
         <div class="checkbox">
-          <label for="robberies-checkbox">ROBOS</label>
-          <input type="checkbox" id="robberies-checkbox" checked />
+          <label for="university-checkbox">FACULTAD</label>
+          <input type="checkbox" id="university-checkbox" checked />
         </div>
         <div class="checkbox">
-          <label for="murders-checkbox">ASESINATOS</label>
-          <input type="checkbox" id="murders-checkbox" checked />
+          <label for="graduated-checkbox">AÑOGRAD.</label>
+          <input type="checkbox" id="graduated-checkbox" checked />
         </div>
       </div>
 
@@ -73,59 +73,77 @@
             <th data-column="name" id="name-checkbox">Nombre</th>
             <th data-column="lastname" id="lastname-checkbox">Apellido</th>
             <th data-column="age" id="age-checkbox">Edad</th>
-            <th data-column="alterEgo" id="alterego-checkbox">Alter Ego</th>
-            <th data-column="city" id="city-checkbox">Ciudad</th>
-            <th data-column="published" id="published-checkbox">Publicado</th>
-            <th data-column="enemy" id="enemy-checkbox">Enemigo</th>
-            <th data-column="robberies" id="robberies-checkbox">Robos</th>
-            <th data-column="murders" id="murders-checkbox">Asesinatos</th>
+            <th data-column="team" id="team-checkbox">Equipo</th>
+            <th data-column="position" id="goals-checkbox">Posición</th>
+            <th data-column="goals" id="goals-checkbox">Cant. Goles</th>
+            <th data-column="title" id="title-checkbox">Título</th>
+            <th data-column="university" id="university-checkbox">Facultad</th>
+            <th data-column="graduated" id="graduated-checkbox">
+              Año Graduado
+            </th>
           </tr>
         </thead>
         <tbody id="table"></tbody>
       </table>
-      <button class="btn" onclick="showABMForm()">Agregar</button>
+      <div style="display: flex">
+        <button class="btn" onclick="showABMForm(null, 'add')">Alta</button>
+        <button class="btn" onclick="showABMForm(null, 'edit')">
+          Modificar
+        </button>
+        <button class="btn" onclick="showABMForm(null, 'delete')">
+          Eliminar
+        </button>
+      </div>
     </div>
     <form id="abm-form">
-      <div>
+      <div id="abm-id-container" style="display: none">
         <label for="abm-id">ID:</label>
         <input type="number" id="abm-id" />
       </div>
       <input type="hidden" id="abm-id" />
-      <div>
+      <div id="abm-name-container" style="display: none">
         <label for="abm-name">Nombre:</label>
         <input type="text" id="abm-name" required />
       </div>
-      <div>
+      <div id="abm-lastname-container" style="display: none">
         <label for="abm-lastname">Apellido:</label>
         <input type="text" id="abm-lastname" required />
       </div>
-      <div>
+      <div id="abm-age-container" style="display: none">
         <label for="abm-age">Edad:</label>
         <input type="number" id="abm-age" required />
       </div>
-      <div>
-        <label for="abm-alterego">Alter Ego:</label>
-        <input type="text" id="abm-alterego" required />
+      <div id="abm-type-container" style="display: none">
+        <label for="abm-type">Tipo:</label>
+        <select id="abm-type">
+          <option value=""></option>
+          <option value="soccerPlayer">Jugador de futbol</option>
+          <option value="professional">Profesional</option>
+        </select>
       </div>
-      <div>
-        <label for="abm-city">Ciudad:</label>
-        <input type="text" id="abm-city" required />
+      <div id="abm-team-container" style="display: none">
+        <label for="abm-team">Equipo:</label>
+        <input type="text" id="abm-team" required />
       </div>
-      <div>
-        <label for="abm-published">Publicado:</label>
-        <input type="number" id="abm-published" />
+      <div id="abm-position-container" style="display: none">
+        <label for="abm-position">Posición:</label>
+        <input type="text" id="abm-position" required />
       </div>
-      <div>
-        <label for="abm-enemy">Enemigo:</label>
-        <input type="checkbox" id="abm-enemy" />
+      <div id="abm-goals-container" style="display: none">
+        <label for="abm-goals">Cantidad de goles:</label>
+        <input type="number" id="abm-goals" />
       </div>
-      <div>
-        <label for="abm-robberies">Robos:</label>
-        <input type="number" id="abm-robberies" required />
+      <div id="abm-title-container" style="display: none">
+        <label for="abm-title">Titulo:</label>
+        <input type="input" id="abm-title" />
       </div>
-      <div>
-        <label for="abm-murders">Asesinatos:</label>
-        <input type="number" id="abm-murders" required />
+      <div id="abm-university-container" style="display: none">
+        <label for="abm-university">Facultad:</label>
+        <input type="text" id="abm-university" required />
+      </div>
+      <div id="abm-graduated-container" style="display: none">
+        <label for="abm-graduated">Año graduado:</label>
+        <input type="number" id="abm-graduated" required />
       </div>
       <div>
         <button type="button" id="add-btn" data-operation="add">Agregar</button>
