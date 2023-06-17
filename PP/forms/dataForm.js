@@ -612,7 +612,7 @@ const handleABMForm = (event) => {
   dataForm.style.display = "block";
 };
 
-addButton.addEventListener("click", handleABMForm);
+addButton.addEventListener("click", obtenerListaDesdeAPI);
 editButton.addEventListener("click", handleABMForm);
 deleteButton.addEventListener("click", handleABMForm);
 cancelButton.addEventListener("click", handleABMForm);

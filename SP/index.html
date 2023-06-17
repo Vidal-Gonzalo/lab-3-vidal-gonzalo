@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio 3 - Primer parcial</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="spinner-container" id="spinner-container">
+      <div class="spinner"></div>
+    </div>
+    <form id="form_datos">
+      <h1>Formulario Lista</h1>
+      <table id="tabla_datos">
+        <thead>
+          <tr>
+            <th data-column="id" id="id-checkbox">ID</th>
+            <th data-column="modelo" id="modelo">Modelo</th>
+            <th data-column="anoFab" id="anoFab">Año fabricado</th>
+            <th data-column="velMax" id="velMax">Velocidad máxima</th>
+            <th data-column="cantPue" id="cantPue">Cantidad de puentes</th>
+            <th data-column="cantRue" id="cantRue">Cantidad de ruedas</th>
+            <th data-column="altMax" id="altMax">Altura máxima</th>
+            <th data-column="autonomia" id="autonomia">Autonomía</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <br />
+    </form>
+    <button id="btnAgregar">Agregar Elemento</button>
+
+    <!-- <div id="spinner" style="width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div id="elemento" >
+        <img src="https://1000logos.net/wp-content/uploads/2017/06/Superman-Logo.png" style="width: 300px;height: 300px;">
+    </div>
+</div> -->
+    <!-- Formulario formABM -->
+    <div id="form_ABM">
+      <form id="formABM">
+        <header
+          id="abmHeader"
+          style="text-align: center; font-weight: bold; font-size: 30px"
+        ></header>
+        <label for="id">ID:</label>
+        <input type="number" id="abm-id" />
+        <br />
+        <label for="abm-modelo">Modelo:</label>
+        <input type="text" id="abm-modelo" />
+        <p class="error-message" id="abm-modelo-error"></p>
+        <br />
+        <label for="abm-anoFab">Año fabricado:</label>
+        <input type="number" id="abm-anoFab" />
+        <p class="error-message" id="abm-anoFab-error"></p>
+        <br />
+        <label for="abm-velMax">Velocidad maxima:</label>
+        <input type="number" id="abm-velMax" />
+        <p class="error-message" id="abm-velMax-error"></p>
+        <br />
+
+        <label for="tipo">Tipo:</label>
+        <select id="selecTipo">
+          <option value="vehiculo">Vehiculo</option>
+          <option value="aereo">Aereo</option>
+          <option value="terrestre">Terrestre</option>
+        </select>
+        <p class="error-message" id="abm-velMax-error"></p>
+        <br />
+
+        <div id="abm-container-ter" style="display: none">
+          <label for="abm-cantPue">Cantidad de puertas:</label>
+          <input type="number" id="abm-cantPue" required />
+          <p class="error-message" id="abm-velMax-error"></p>
+          <label for="abm-cantRue">Cantidad de ruedas:</label>
+          <input type="number" id="abm-cantRue" required />
+          <p class="error-message" id="abm-velMax-error"></p>
+        </div>
+        <div id="abm-container-aer" style="display: none">
+          <label for="abm-altMax">Altura máxima:</label>
+          <input type="number" id="abm-altMax" required />
+          <p class="error-message" id="abm-velMax-error"></p>
+          <br />
+          <label for="abm-autonomia">Autonomía:</label>
+          <input type="text" id="abm-autonomia" required />
+          <p class="error-message" id="abm-velMax-error"></p>
+          <br />
+        </div>
+        <button type="button" id="btnAceptar">Aceptar</button>
+        <button type="button" id="btnEditar" style="display: none">
+          Editar
+        </button>
+        <button type="button" id="btnCancelar">Cancelar</button>
+      </form>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
